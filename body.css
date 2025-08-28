@@ -1,0 +1,45 @@
+body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+#bg{
+    
+  
+  backdrop-filter: blur(20px) saturate(190%)brightness(105%);
+
+}
+
+#playback{
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px) saturate(190%)brightness(105%);
+}
+
+/* Progress bar styling */
+#progressBar {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+#progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+#progressBar::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  border: none;
+}

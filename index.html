@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="body.css" />
+    <title>Musy</title>
+  </head>
+
+  <body>
+    <img id="albumArt" src="assets/images/pic.jpg" crossorigin="anonymous" hidden />
+    <div id="dynamic-bg" class="absolute inset-0">
+
+      <main
+  id="bg"
+  class="w-full h-dvh bg-neutral-800/10 flex flex-col"
+>
+  <div class="flex justify-center items-center space-x-2 m-3 ">
+    <h1 class="text-xl font-semibold text-center text-[#FFD93D] drop-shadow-[0_0_8px_rgba(255,217,61,0.5)]
+ ">musy</h1>
+    <svg class="w-4 h-4 text-[#FFD93D]" aria-hidden="true">
+      <use href="icons.svg#icon-music"></use>
+    </svg>
+  </div>
+
+  <section class="flex-col flex items-center">
+    <img src="assets/images/pic.jpg" alt="" id="song-album" class="h-74 w-74 sm:h-80 sm:w-80 md:h-96 md:w-96 max-w-full rounded-3xl">
+    <div class="mt-1">
+      <h1 id="song-title" class="font-bold text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">
+  I think they call this love
+</h1>
+<h3 id="song-artist" class="font-semibold text-slate-300 text-sm sm:text-base md:text-lg">
+  matthew ifield
+</h3>
+    </div>
+  </section>
+
+  <!-- Playback: fills remaining space -->
+  <section
+    class="backdrop-blur-md w-full rounded-t-3xl flex flex-col items-center flex-grow justify-center mt-6 shadow-lg bg-white/10" id="playback"
+  >
+    <input
+      id="progressBar"
+      type="range"
+      min="0"
+      max="100"
+      value="0"
+      class="w-[90%] accent-slate-600"
+    >
+    <div class="w-[90%] flex justify-between text-slate-300" > 
+      <p class="time-current">0:00</p>
+      <p class="time-total">3:00</p>
+    </div>
+    <!-- Replaced external sprite <use> icons with inline SVGs -->
+<div class="bg-black/50 flex items-center gap-6 mt-4 text-slate-600 backdrop-blur-md shadow-2xl rounded-3xl p-4">
+  <!-- Prev (double chevron left) -->
+   
+  <button id="prevBtn" aria-label="Previous" class="hover:scale-110 transition">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 pointer-events-none text-slate-400">
+      <path fill-rule="evenodd" d="M10.72 11.47a.75.75 0 0 0 0 1.06l7.5 7.5a.75.75 0 1 0 1.06-1.06L12.31 12l6.97-6.97a.75.75 0 0 0-1.06-1.06l-7.5 7.5Z" clip-rule="evenodd" />
+      <path fill-rule="evenodd" d="M4.72 11.47a.75.75 0 0 0 0 1.06l7.5 7.5a.75.75 0 1 0 1.06-1.06L6.31 12l6.97-6.97a.75.75 0 0 0-1.06-1.06l-7.5 7.5Z" clip-rule="evenodd" />
+    </svg>
+  </button>
+  <!-- Play exact circle -->
+  <button id="playBtn" aria-label="Play / Pause" class="relative flex items-center justify-center bg-[#1EB955] rounded-full h-16 w-16 aspect-square p-0 leading-none hover:scale-110 transition focus:outline-none focus-visible:ring-4 focus-visible:ring-[#1EB955]/40 shadow-xl shadow-[#1EB955]/50">
+    <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 pointer-events-none text-slate-200">
+      <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd" />
+    </svg>
+    <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 hidden absolute inset-0 m-auto pointer-events-none text-slate-200">
+      <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 0 1 .75-.75H9a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H7.5a.75.75 0 0 1-.75-.75V5.25Zm7.5 0A.75.75 0 0 1 15 4.5h1.5a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H15a.75.75 0 0 1-.75-.75V5.25Z" clip-rule="evenodd" />
+    </svg>
+  </button>
+  <!-- Next (double chevron right) -->
+  <button id="nextBtn" aria-label="Next" class="hover:scale-110 transition">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 pointer-events-none text-slate-400">
+      <path fill-rule="evenodd" d="M13.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L11.69 12 4.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z" clip-rule="evenodd" />
+      <path fill-rule="evenodd" d="M19.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 0 1 1.06-1.06l7.5 7.5Z" clip-rule="evenodd" />
+    </svg>
+  </button>
+</div>
+   
+  </section>
+</main>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
+
+    <!-- Your scripts -->
+    <script src="color.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
