@@ -2,7 +2,6 @@
 let title = document.querySelector('#song-title');
 let artist = document.querySelector('#song-artist');
 let cover = document.querySelector('#song-album');
-let backgroundCover = document.querySelector('#albumArt');
 let playBtn = document.querySelector('#playBtn');
 let prevBtn = document.querySelector('#prevBtn');
 let nextBtn = document.querySelector('#nextBtn');
@@ -22,7 +21,7 @@ const tracks = [
     title: 'Wanna Be Yours',
     artist: 'artic monkey',
     src: 'assets/music/song2.mp3',
-    cover: 'assets/images/pic2.jpg' // Using same cover as placeholder since pic2.jpg wasn't found
+    cover: 'assets/images/pic2.jpg'
   },
   // Add more tracks here
 ];
@@ -47,7 +46,6 @@ function loadTrack(index) {
   artist.textContent = track.artist;
   cover.src = track.cover;
   cover.alt = `${track.title} album cover`;
-  backgroundCover.src = track.cover;
   
   // Update audio source
   audio.src = track.src;
@@ -57,14 +55,6 @@ function loadTrack(index) {
   
   // Update play button to show play icon
   updatePlayButton(false);
-  
-  // Apply color theme based on new album art
-  // Wait a short moment for the image to be loaded in the DOM
-  setTimeout(() => {
-    if (typeof window.applyBackground === 'function') {
-      window.applyBackground();
-    }
-  }, 100);
   
   console.log(`Loaded: ${track.title} by ${track.artist}`);
 }
@@ -97,30 +87,35 @@ function pauseTrack() {
 
 // Navigation Functions
 function nextTrack() {
+  const prevIndex = currentTrackIndex;
   currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-  loadTrack(currentTrackIndex);
-  if (isPlaying) {
-    playTrack();
+  
+  // Apply background color immediately with the new track index
+  if (typeof window.applyBackground === 'function') {
+    window.applyBackground(currentTrackIndex);
   }
   
-  // Extra call to ensure color effect is applied
-  if (typeof window.applyBackground === 'function') {
-    // Allow image to load properly before applying colors
-    setTimeout(window.applyBackground, 200);
+  // Then load the track (which updates UI elements)
+  loadTrack(currentTrackIndex);
+  
+  if (isPlaying) {
+    playTrack();
   }
 }
 
 function prevTrack() {
   currentTrackIndex = currentTrackIndex === 0 ? tracks.length - 1 : currentTrackIndex - 1;
-  loadTrack(currentTrackIndex);
-  if (isPlaying) {
-    playTrack();
+  
+  // Apply background color immediately with the new track index
+  if (typeof window.applyBackground === 'function') {
+    window.applyBackground(currentTrackIndex);
   }
   
-  // Also apply color effect when going to previous track
-  if (typeof window.applyBackground === 'function') {
-    // Allow image to load properly before applying colors
-    setTimeout(window.applyBackground, 200);
+  // Then load the track (which updates UI elements)
+  loadTrack(currentTrackIndex);
+  
+  if (isPlaying) {
+    playTrack();
   }
 }
 
